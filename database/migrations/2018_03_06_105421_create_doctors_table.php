@@ -15,10 +15,18 @@ class CreateDoctorsTable extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('user_id')->unique();
             $table->string('speciality');
+            //$table->unsignedInteger('patient_id');
+            //$table->unsignedInteger('appointment_id');
             $table->timestamps();
+
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            //$table->foreign('patient_id')->references('patient_id')->on('doctor_patient')->onDelete('cascade')->onUpdate('cascade');
+            //$table->foreign('appointment_id')->references('id')->on('appointments')->onDelete('cascade')->onUpdate('cascade');
         });
+
     }
 
     /**
