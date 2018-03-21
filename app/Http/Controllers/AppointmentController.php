@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Symptom;
+use App\Appointment;
 use Illuminate\Http\Request;
 
-class SymptomController extends Controller
+class AppointmentController extends Controller
 {
 
     public function __construct()
@@ -19,17 +19,21 @@ class SymptomController extends Controller
      */
     public function index()
     {
+        //
+        $appointments = Appointment::all();
 
-        $symptoms = Symptom::all();
-
-        return view('symptoms/index')->with('symptoms', $symptoms);
+        return view('appointments/index')->with('appointments', $appointments);
     }
 
-
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         //
-        return view('symptoms/create');
+        return view('appointments/create');
     }
 
     /**
@@ -41,28 +45,26 @@ class SymptomController extends Controller
     public function store(Request $request)
     {
         //
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function show(Symptom $symptom)
+    public function show(Appointment $appointment)
     {
         //
-        return view('Symptom/show',['symptom'=>$symptom]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Appointment $appointment)
     {
         //
     }
@@ -71,10 +73,10 @@ class SymptomController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Appointment $appointment)
     {
         //
     }
@@ -82,21 +84,11 @@ class SymptomController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Appointment $appointment)
     {
         //
-    }
-
-    public function  destroyAll()
-    {
-        $symptoms = Symptom::all();
-        foreach ($symptoms as $symptom){
-            $symptom->delete();
-        }
-
-
     }
 }

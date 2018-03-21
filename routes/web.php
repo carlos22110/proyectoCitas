@@ -15,6 +15,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::delete('doctors/destroyAll', 'DoctorController@destroyAll')->name('doctors.destroyAll');
+Route::delete('patients/destroyAll', 'PatientController@destroyAll')->name('patients.destroyAll');
+
+
+Route::resource('doctors', 'DoctorController');
+Route::resource('patients', 'PatientController');
+Route::resource('symptoms', 'SymptomController');
+Route::resource('appointments', 'AppointmentsController');
+
+
+
+
+
+
+
+
+
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

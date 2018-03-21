@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Doctor extends Model
 {
     //
+
+    protected $fillable = ['name', 'surname', 'speciality'];
+
     public function user()
     {
         return $this->belongsTo('App\User');
