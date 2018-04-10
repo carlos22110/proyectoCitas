@@ -12,8 +12,6 @@ class AppointmentsTableSeeder extends Seeder
     public function run()
     {
         //
-        factory(App\Appointment::class, 30)->create()->each(function ($u) {
-            $u->posts()->save(factory(App\Appointment::class)->make());
-        });
+        factory(App\Appointment::class, 30)->create();
     }
 }

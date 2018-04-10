@@ -41,6 +41,18 @@ class SymptomController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'description' => 'required|max:255'
+        ]);
+
+        $symptom = new Symptom($request->all());
+        $symptom->save();
+
+        // return redirect('especialidades');
+
+        flash('Sintoma creado correctamente');
+
+        return redirect()->route('symptoms.index');
 
     }
 
@@ -50,10 +62,10 @@ class SymptomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Symptom $symptom)
+    public function show( $id)
     {
         //
-        return view('Symptom/show',['symptom'=>$symptom]);
+        return view('symptom.profile', ['symptom' => Symptom::findOrFail($id)]);
     }
 
     /**
@@ -65,6 +77,8 @@ class SymptomController extends Controller
     public function edit($id)
     {
         //
+        $symptom = Symptom::find($id);
+        return view('symptoms/edit',['symptom'=> $symptom ]);
     }
 
     /**
@@ -77,6 +91,18 @@ class SymptomController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'description' => 'required|max:255'
+        ]);
+
+        $symptom = Symptom::find($id);
+        $symptom->fill($request->all());
+
+        $symptom->save();
+
+        flash('Sintoma modificado correctamente');
+
+        return redirect()->route('symptoms.index');
     }
 
     /**
@@ -88,6 +114,11 @@ class SymptomController extends Controller
     public function destroy($id)
     {
         //
+        $symptom = Symptom::find($id);
+        $symptom->delete();
+        flash('Sintoma borrado correctamente');
+
+        return redirect()->route('symptoms.index');
     }
 
     public function  destroyAll()

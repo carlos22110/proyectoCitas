@@ -12,8 +12,6 @@ class DoctorsTableSeeder extends Seeder
     public function run()
     {
         //
-        factory(App\Doctor::class, 15)->create()->each(function ($u) {
-            $u->posts()->save(factory(App\Doctor::class)->make());
-        });
+        factory(App\Doctor::class, 15)->create();
     }
 }

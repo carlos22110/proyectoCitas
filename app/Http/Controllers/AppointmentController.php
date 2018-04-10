@@ -45,6 +45,19 @@ class AppointmentController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'date' => 'required|max:255',
+            'reason' => 'required|max:255'
+        ]);
+
+        $appointment = new Appointment($request->all());
+        $appointment->save();
+
+        // return redirect('especialidades');
+
+        flash('Cita creada correctamente');
+
+        return redirect()->route('appointments.index');
     }
 
     /**
@@ -53,9 +66,10 @@ class AppointmentController extends Controller
      * @param  \App\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function show(Appointment $appointment)
+    public function show( $id)
     {
         //
+        return view('appointment.profile', ['appointment' => Appointment::findOrFail($id)]);
     }
 
     /**
@@ -64,9 +78,12 @@ class AppointmentController extends Controller
      * @param  \App\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Appointment $appointment)
+    public function edit($id)
     {
         //
+        $appointment = Appointment::find($id);
+
+        return view('appointments/edit',['appointment'=> $appointment ]);
     }
 
     /**
@@ -76,9 +93,22 @@ class AppointmentController extends Controller
      * @param  \App\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Appointment $appointment)
+    public function update(Request $request,  $id)
     {
         //
+        $this->validate($request, [
+            'date' => 'required|max:255',
+            'reason' => 'required|max:255'
+        ]);
+
+        $appointment = Appointment::find($id);
+        $appointment->fill($request->all());
+
+        $appointment->save();
+
+        flash('Cita modificada correctamente');
+
+        return redirect()->route('appointments.index');
     }
 
     /**
@@ -87,8 +117,13 @@ class AppointmentController extends Controller
      * @param  \App\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Appointment $appointment)
+    public function destroy($id)
     {
         //
+        $appointment = Appointment::find($id);
+        $appointment->delete();
+        flash('Cita borrada correctamente');
+
+        return redirect()->route('appointments.index');
     }
 }

@@ -6,8 +6,7 @@ $factory->define(App\Patient::class, function (Faker $faker) {
     return [
         //
         'nuhsa' => $faker->randomNumber(8),
-        'medicalHistory' => $faker->words,
-        'DNI/NIF' => $faker->unique()->randomNumber(8),
-        'address' => $faker->streetAddress
+        'medicalHistory' => $faker->word,
+        'user_id' => factory('App\User')->create()->id
     ];
 });

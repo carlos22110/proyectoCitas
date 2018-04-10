@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class PatientController extends Controller
 {
 
-    public function __construct()
+/*    public function __construct()
     {
         $this->middleware('auth');
     }
@@ -44,7 +44,20 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate($request, [
+            'medicalHistory' => 'required|max:255',
+            'nuhsa' => 'required|nuhsa|max:255'
+        ]);
+
+        $patient = new Patient($request->all());
+        $patient->save();
+
+        // return redirect('especialidades');
+
+        flash('Paciente creado correctamente');
+
+        return redirect()->route('patients.index');
     }
 
     /**
@@ -53,9 +66,10 @@ class PatientController extends Controller
      * @param  \App\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function show(Patient $patient)
+    public function show($id)
     {
         //
+        return view('patient.profile', ['patient' => Patient::findOrFail($id)]);
     }
 
     /**
@@ -64,9 +78,12 @@ class PatientController extends Controller
      * @param  \App\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function edit(Patient $patient)
+    public function edit($id)
     {
         //
+        $patient = Patient::find($id);
+
+        return view('patients/edit',['patient'=> $patient ]);
     }
 
     /**
@@ -76,9 +93,22 @@ class PatientController extends Controller
      * @param  \App\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Patient $patient)
+    public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'medicalHistory' => 'required|max:255',
+            'nuhsa' => 'required|nuhsa|max:255'
+        ]);
+
+        $patient = Patient::find($id);
+        $patient->fill($request->all());
+
+        $patient->save();
+
+        flash('Paciente modificado correctamente');
+
+        return redirect()->route('patients.index');
     }
 
     /**
@@ -87,8 +117,13 @@ class PatientController extends Controller
      * @param  \App\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Patient $patient)
+    public function destroy($id)
     {
         //
+        $patient = Patient::find($id);
+        $patient->delete();
+        //flash('Paciente borrado correctamente');
+
+        return redirect()->route('patients.index');
     }
 }

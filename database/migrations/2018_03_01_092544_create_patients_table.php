@@ -18,15 +18,11 @@ class CreatePatientsTable extends Migration
             $table->unsignedInteger('user_id')->unique();
             $table->integer('nuhsa')->unique();
             $table->string('medicalHistory');
-            //$table->unsignedInteger('doctor_id');
-            //$table->unsignedInteger('symptom_id');
-            //$table->unsignedInteger('appointment_id');
+
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            //$table->foreign('doctor_id')->references('doctor_id')->on('doctor_patient')->onDelete('cascade')->onUpdate('cascade');
-            //$table->foreign('symptom_id')->references('id')->on('symptoms')->onDelete('cascade')->onUpdate('cascade');
-            //$table->foreign('appointment_id')->references('id')->on('appointments')->onDelete('cascade')->onUpdate('cascade');
+
         });
     }
 

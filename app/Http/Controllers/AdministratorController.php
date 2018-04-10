@@ -45,6 +45,17 @@ class AdministratorController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+
+        ]);
+        $administrator = new Administrator($request->all());
+        $administrator->save();
+
+        // return redirect('especialidades');
+
+        flash('Administrador creado correctamente');
+
+        return redirect()->route('administrators.index');
     }
 
     /**
@@ -53,9 +64,10 @@ class AdministratorController extends Controller
      * @param  \App\Administrator  $administrator
      * @return \Illuminate\Http\Response
      */
-    public function show(Administrator $administrator)
+    public function show( $id)
     {
         //
+        return view('administrator.profile', ['administrator' => Administrator::findOrFail($id)]);
     }
 
     /**
@@ -64,9 +76,12 @@ class AdministratorController extends Controller
      * @param  \App\Administrator  $administrator
      * @return \Illuminate\Http\Response
      */
-    public function edit(Administrator $administrator)
+    public function edit( $id)
     {
         //
+        $administrator = Administrator::find($id);
+        return view('administrators/edit',['administrator'=> $administrator ]);
+
     }
 
     /**
@@ -76,9 +91,20 @@ class AdministratorController extends Controller
      * @param  \App\Administrator  $administrator
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Administrator $administrator)
+    public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+        ]);
+
+        $administrator = Administrator::find($id);
+        $administrator->fill($request->all());
+
+        $administrator->save();
+
+        flash('Administrador modificado correctamente');
+
+        return redirect()->route('administrators.index');
     }
 
     /**
@@ -87,8 +113,13 @@ class AdministratorController extends Controller
      * @param  \App\Administrator  $administrator
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Administrator $administrator)
+    public function destroy($id)
     {
         //
+        $administrator = Administrator::find($id);
+        $administrator->delete();
+        flash('Administrador borrado correctamente');
+
+        return redirect()->route('administrators.index');
     }
 }

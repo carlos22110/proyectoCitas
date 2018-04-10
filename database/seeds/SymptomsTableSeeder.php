@@ -12,8 +12,6 @@ class SymptomsTableSeeder extends Seeder
     public function run()
     {
         //
-        factory(App\Symptom::class, 50)->create()->each(function ($u) {
-            $u->posts()->save(factory(App\Symptom::class)->make());
-        });
+        factory(App\Symptom::class, 50)->create();
     }
 }
