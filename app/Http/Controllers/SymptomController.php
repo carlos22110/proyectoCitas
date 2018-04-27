@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class SymptomController extends Controller
 {
 
-    public function __construct()
+   /* public function __construct()
     {
         $this->middleware('auth');
     }
@@ -50,7 +50,7 @@ class SymptomController extends Controller
 
         // return redirect('especialidades');
 
-        flash('Sintoma creado correctamente');
+        flash('Síntoma creado correctamente');
 
         return redirect()->route('symptoms.index');
 
@@ -100,7 +100,7 @@ class SymptomController extends Controller
 
         $symptom->save();
 
-        flash('Sintoma modificado correctamente');
+        flash('Síntoma modificado correctamente');
 
         return redirect()->route('symptoms.index');
     }
@@ -116,7 +116,7 @@ class SymptomController extends Controller
         //
         $symptom = Symptom::find($id);
         $symptom->delete();
-        flash('Sintoma borrado correctamente');
+        flash('Síntoma borrado correctamente');
 
         return redirect()->route('symptoms.index');
     }

@@ -152,6 +152,8 @@ return [
          * Package Service Providers...
          */
         Collective\Html\HtmlServiceProvider::class,
+
+        FlashMessage\FlashServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -212,6 +214,7 @@ return [
 
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+
 
     ],
 

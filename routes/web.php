@@ -18,7 +18,8 @@ Route::get('/', function () {
 Route::delete('doctors/destroyAll', 'DoctorController@destroyAll')->name('doctors.destroyAll');
 Route::delete('patients/destroyAll', 'PatientController@destroyAll')->name('patients.destroyAll');
 
-
+Route::resource('users', 'UserController');
+Route::resource('administrators', 'AdministratorController');
 Route::resource('doctors', 'DoctorController');
 Route::resource('patients', 'PatientController');
 Route::resource('symptoms', 'SymptomController');

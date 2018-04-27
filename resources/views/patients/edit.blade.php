@@ -8,7 +8,7 @@
                     <div class="panel-heading">Editar paciente</div>
 
                     <div class="panel-body">
-
+                        @include('flash::message')
 
                         {!! Form::model($patient, [ 'route' => ['patients.update',$patient->id], 'method'=>'PUT']) !!}
 

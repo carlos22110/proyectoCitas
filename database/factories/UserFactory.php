@@ -23,7 +23,7 @@ $factory->define(App\User::class, function (Faker $faker) {
 
         'surname' => $faker->lastName,
         'birthdate' => $faker->date,
-        'DNI/NIF' => $faker->unique()->randomNumber(8),
+        'NIF' => $faker->unique()->randomNumber(8),
         'address' => $faker->streetAddress
 
 

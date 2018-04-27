@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bfc9ad3c2307aaa60b4b6af152528679",
+    "content-hash": "1fdefb9de0481916ed26047faeb64352",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -879,6 +879,49 @@
                 "psr-3"
             ],
             "time": "2017-06-19T01:22:40+00:00"
+        },
+        {
+            "name": "mtxr/laravel-flash-message",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mtxr/laravel-flash-message.git",
+                "reference": "1716a6652c106e06c33f66ed916fef892a5389dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mtxr/laravel-flash-message/zipball/1716a6652c106e06c33f66ed916fef892a5389dc",
+                "reference": "1716a6652c106e06c33f66ed916fef892a5389dc",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "FlashMessage\\": "src/"
+                },
+                "files": [
+                    "src/FlashMessage/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matheus",
+                    "email": "me@mteixeira.me"
+                }
+            ],
+            "description": "Flash Messages made easy. Based on laracasts/flash",
+            "time": "2016-09-14T00:52:57+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -4074,7 +4117,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "mtxr/laravel-flash-message": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

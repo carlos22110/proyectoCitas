@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Patient;
+use App\Symptom;
+use App\User;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -33,7 +35,10 @@ class PatientController extends Controller
     public function create()
     {
         //
-        return view('patients/create');
+        $symptoms = Symptom::all()->pluck('description','id');
+
+        return view('patients/create',['symptoms'=>$symptoms]);
+      //  return view('patients/create');
     }
 
     /**
@@ -47,10 +52,15 @@ class PatientController extends Controller
 
         $this->validate($request, [
             'medicalHistory' => 'required|max:255',
-            'nuhsa' => 'required|nuhsa|max:255'
+            'nuhsa' => 'required|max:255',
+            'symptom_id' => 'required|exists:symptoms,id'
         ]);
 
+        $user = new User($request->all());
+        $user->save();
+
         $patient = new Patient($request->all());
+        $patient['user_id'] = $user->id;
         $patient->save();
 
         // return redirect('especialidades');
@@ -82,8 +92,10 @@ class PatientController extends Controller
     {
         //
         $patient = Patient::find($id);
+        $symptoms = Symptom::all()->pluck('description','id');
 
-        return view('patients/edit',['patient'=> $patient ]);
+        return view('patients/edit',['patient'=> $patient, 'symptoms' =>$symptoms]);
+
     }
 
     /**
@@ -98,7 +110,8 @@ class PatientController extends Controller
         //
         $this->validate($request, [
             'medicalHistory' => 'required|max:255',
-            'nuhsa' => 'required|nuhsa|max:255'
+            'nuhsa' => 'required|max:255',
+            'symptom_id' => 'required|exists:symptoms,id'
         ]);
 
         $patient = Patient::find($id);
@@ -122,7 +135,7 @@ class PatientController extends Controller
         //
         $patient = Patient::find($id);
         $patient->delete();
-        //flash('Paciente borrado correctamente');
+        flash('Paciente borrado correctamente');
 
         return redirect()->route('patients.index');
     }

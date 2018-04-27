@@ -34,5 +34,6 @@ class DoctorPatient extends Migration
     public function down()
     {
         //
+        Schema::dropIfExists('doctor_patient');
     }
 }

@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Doctor;
+use App\User;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
 
-    public function __construct()
+   /* public function __construct()
     {
         $this->middleware('auth');
     }
@@ -50,12 +51,23 @@ class DoctorController extends Controller
             'speciality' => 'required|max:255'
 
         ]);
+
+        //TODO: Primero crear un User y hacer un $user->save()
+        // TODO: Una vez guardado el usuario acceder al Id que se haya generado $user->id
+
+        $user = new User($request->all());
+        $user->save();
+
         $doctor = new Doctor($request->all());
+        $doctor['user_id'] = $user->id;
         $doctor->save();
 
-        // return redirect('especialidades');
 
-        flash('Medico creado correctamente');
+            // $user->id ->save($doctor->user_id);
+
+            // return redirect('especialidades');
+
+        flash('Médico creado correctamente');
 
         return redirect()->route('doctors.index');
     }
@@ -105,7 +117,7 @@ class DoctorController extends Controller
 
         $doctor->save();
 
-        flash('Paciente modificado correctamente');
+        flash('Médico modificado correctamente');
 
         return redirect()->route('doctors.index');
     }
@@ -121,7 +133,7 @@ class DoctorController extends Controller
         //
         $doctor = Doctor::find($id);
         $doctor->delete();
-        flash('Medico borrado correctamente');
+        flash('Médico borrado correctamente');
 
         return redirect()->route('doctors.index');
     }
