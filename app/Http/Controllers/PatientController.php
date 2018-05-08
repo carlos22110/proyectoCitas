@@ -6,6 +6,7 @@ use App\Patient;
 use App\Symptom;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class PatientController extends Controller
 {
@@ -53,11 +54,15 @@ class PatientController extends Controller
         $this->validate($request, [
             'medicalHistory' => 'required|max:255',
             'nuhsa' => 'required|max:255',
-            'symptom_id' => 'required|exists:symptoms,id'
+            //'symptom_id' => 'required|exists:symptoms,id'
         ]);
 
         $user = new User($request->all());
+
+        $user->password=Hash::make($user['password']);
         $user->save();
+
+
 
         $patient = new Patient($request->all());
         $patient['user_id'] = $user->id;
@@ -111,7 +116,7 @@ class PatientController extends Controller
         $this->validate($request, [
             'medicalHistory' => 'required|max:255',
             'nuhsa' => 'required|max:255',
-            'symptom_id' => 'required|exists:symptoms,id'
+            //'symptom_id' => 'required|exists:symptoms,id'
         ]);
 
         $patient = Patient::find($id);

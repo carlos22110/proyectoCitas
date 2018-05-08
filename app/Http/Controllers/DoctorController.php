@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Doctor;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class DoctorController extends Controller
 {
@@ -56,10 +57,17 @@ class DoctorController extends Controller
         // TODO: Una vez guardado el usuario acceder al Id que se haya generado $user->id
 
         $user = new User($request->all());
+
+        //$user->name = Input::get('name');
+
+        $user->password=Hash::make($user['password']);
+        //$user->password = Hash::make(Input::get('password'));
+
         $user->save();
 
         $doctor = new Doctor($request->all());
         $doctor['user_id'] = $user->id;
+
         $doctor->save();
 
 

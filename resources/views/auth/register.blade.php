@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="birthdate" class="col-md-4 col-form-label text-md-right">Fecha de nacimiento</label>
+                            <label for="birthdate" class="col-md-4 col-form-label text-md-right">Fecha de nacimiento (aaaa-mm-dd)</label>
 
                         <div class="col-md-6">
                             <input id="birthdate" type="text" class="form-control{{ $errors->has('birthdate') ? ' is-invalid' : '' }}" name="birthdate" value="{{ old('birthdate') }}" required autofocus>
@@ -54,14 +54,14 @@
                 </div>
 
                         <div class="form-group row">
-                            <label for="DNI/NIF" class="col-md-4 col-form-label text-md-right">DNI/NIF</label>
+                            <label for="NIF" class="col-md-4 col-form-label text-md-right">NIF</label>
 
                             <div class="col-md-6">
-                                <input id="DNI/NIF" type="text" class="form-control{{ $errors->has('DNI/NIF') ? ' is-invalid' : '' }}" name="DNI/NIF" value="{{ old('DNI/NIF') }}" required autofocus>
+                                <input id="NIF" type="text" class="form-control{{ $errors->has('NIF') ? ' is-invalid' : '' }}" name="NIF" value="{{ old('NIF') }}" required autofocus>
 
-                                @if ($errors->has('DNI/NIF'))
+                                @if ($errors->has('NIF'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('DNI/NIF') }}</strong>
+                                        <strong>{{ $errors->first('NIF') }}</strong>
                                     </span>
                                 @endif
                             </div>

@@ -14,8 +14,13 @@
 
                         <div class="form-group">
                             {!! Form::label('description', 'Descripción del síntoma') !!}
-                            {!! Form::text('nuhsa',null,['class'=>'form-control', 'required']) !!}
+                            {!! Form::text('description',null,['class'=>'form-control', 'required']) !!}
                         </div>
+                        <div class="form-group">
+                        {!! Form::label('patient_id', 'ID del paciente al que pertenece') !!}
+                        {!! Form::text('patient_id',null,['class'=>'form-control', 'required']) !!}
+                        </div>
+
 
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
 
@@ -26,3 +31,4 @@
         </div>
     </div>
 @endsection
+

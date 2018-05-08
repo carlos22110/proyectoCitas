@@ -23,7 +23,7 @@ Route::resource('administrators', 'AdministratorController');
 Route::resource('doctors', 'DoctorController');
 Route::resource('patients', 'PatientController');
 Route::resource('symptoms', 'SymptomController');
-Route::resource('appointments', 'AppointmentsController');
+Route::resource('appointments', 'AppointmentController');
 
 
 

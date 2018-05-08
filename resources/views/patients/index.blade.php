@@ -27,12 +27,13 @@
 
                             @foreach ($patients as $patient)
 
+                                @foreach($symptoms as $symptom)
 
 
                                 <tr>
                                     <td>{{ $patient->nuhsa }}</td>
                                     <td>{{ $patient->medicalHistory }}</td>
-                                    <td>{{ $patient->symptom }}</td>
+                                    <td>{{ $patient['id']->$symptom->description }}</td>
 
                                     <td>
                                         {!! Form::open(['route' => ['patients.edit',$patient->id], 'method' => 'get']) !!}
@@ -46,6 +47,7 @@
 
                                     </td>
                                 </tr>
+                                @endforeach
                             @endforeach
                         </table>
                     </div>

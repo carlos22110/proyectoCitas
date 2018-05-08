@@ -5,38 +5,43 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Síntomas</div>
+                    <div class="panel-heading">Citas</div>
 
                     <div class="panel-body">
                         @include('flash::message')
-                        {!! Form::open(['route' => 'symptoms.create', 'method' => 'get']) !!}
-                        {!!   Form::submit('Crear síntoma', ['class'=> 'btn btn-primary'])!!}
+                        {!! Form::open(['route' => 'appointments.create', 'method' => 'get']) !!}
+                        {!!   Form::submit('Crear cita', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
 
                         <br><br>
                         <table class="table table-striped table-bordered">
                             <tr>
 
-                                <th>Descripción</th>
+                                <th>Fecha y Hora</th>
+                                <th>Motivo</th>
+                                <th>ID del médico</th>
                                 <th>ID del paciente</th>
+
 
                                 <th colspan="2">Acciones</th>
                             </tr>
 
-                            @foreach ($symptoms as $symptom)
+                            @foreach ($appointments as $appointment)
 
 
 
                                 <tr>
-                                    <td>{{ $symptom->description }}</td>
-                                    <td>{{ $symptom->patient_id }}</td>
+                                    <td>{{ $appointment->date }}</td>
+                                    <td>{{ $appointment->reason }}</td>
+                                    <td>{{ $appointment->doctor_id }}</td>
+                                    <td>{{ $appointment->patient_id }}</td>
                                     <td>
-                                        {!! Form::open(['route' => ['symptoms.edit',$symptom->id], 'method' => 'get']) !!}
+                                        {!! Form::open(['route' => ['appointments.edit',$appointment->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                         {!! Form::close() !!}
                                     </td>
                                     <td>
-                                        {!! Form::open(['route' => ['symptoms.destroy',$symptom->id], 'method' => 'delete']) !!}
+                                        {!! Form::open(['route' => ['appointments.destroy',$appointment->id], 'method' => 'delete']) !!}
                                         {!!   Form::submit('Borrar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                         {!! Form::close() !!}
 

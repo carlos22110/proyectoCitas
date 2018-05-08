@@ -42,7 +42,8 @@ class SymptomController extends Controller
     {
         //
         $this->validate($request, [
-            'description' => 'required|max:255'
+            'description' => 'required|max:255',
+            'patient_id' => 'required|max:255'
         ]);
 
         $symptom = new Symptom($request->all());
@@ -92,7 +93,8 @@ class SymptomController extends Controller
     {
         //
         $this->validate($request, [
-            'description' => 'required|max:255'
+            'description' => 'required|max:255',
+            'patient_id' => 'required|max:255'
         ]);
 
         $symptom = Symptom::find($id);

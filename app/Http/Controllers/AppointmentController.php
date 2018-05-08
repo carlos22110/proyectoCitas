@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AppointmentController extends Controller
 {
 
-    public function __construct()
+ /*   public function __construct()
     {
         $this->middleware('auth');
     }
@@ -47,7 +47,9 @@ class AppointmentController extends Controller
         //
         $this->validate($request, [
             'date' => 'required|max:255',
-            'reason' => 'required|max:255'
+            'reason' => 'required|max:255',
+            'doctor_id' => 'required|max:255',
+            'patient_id' => 'required|max:255'
         ]);
 
         $appointment = new Appointment($request->all());
@@ -98,7 +100,8 @@ class AppointmentController extends Controller
         //
         $this->validate($request, [
             'date' => 'required|max:255',
-            'reason' => 'required|max:255'
+            'reason' => 'required|max:255',
+            'doctor_id' => 'required|max:255'
         ]);
 
         $appointment = Appointment::find($id);

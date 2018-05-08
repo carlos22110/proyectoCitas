@@ -15,7 +15,7 @@ class CreateSymptomsTable extends Migration
     {
         Schema::create('symptoms', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('patient_id')->unique();
+            $table->unsignedInteger('patient_id');
             $table->string('description');
             $table->timestamps();
 

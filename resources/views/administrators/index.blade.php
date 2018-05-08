@@ -18,7 +18,7 @@
                             <tr>
                                 <th>ID</th>
 
-                                <th colspan="2">Acciones</th>
+                                <th colspan="1">Acción</th>
                             </tr>
 
                             @foreach ($administrators as $administrator)
@@ -27,11 +27,6 @@
                                 <tr>
                                     <td>{{ $administrator->id }}</td>
 
-                                    <td>
-                                        {!! Form::open(['route' => ['administrators.edit',$administrator->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
-                                        {!! Form::close() !!}
-                                    </td>
                                     <td>
                                         {!! Form::open(['route' => ['administrators.destroy',$administrator->id], 'method' => 'delete']) !!}
                                         {!!   Form::submit('Borrar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}

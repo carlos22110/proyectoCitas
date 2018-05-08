@@ -33,7 +33,7 @@
                             {!! Form::text('NIF',null,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('birthdate', 'Fecha de nacimiento del médico') !!}
+                            {!! Form::label('birthdate', 'Fecha de nacimiento del médico (aa-mm-dd)') !!}
                             {!! Form::text('birthdate',null,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">

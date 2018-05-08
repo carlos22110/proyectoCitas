@@ -8,7 +8,7 @@ class Symptom extends Model
 {
     //
 
-    protected $fillable = ['description'];
+    protected $fillable = ['description', 'patient_id'];
 
     public function patient()
     {

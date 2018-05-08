@@ -20,6 +20,9 @@
                             {!! Form::label('medicalHistory', 'Historial medico del paciente') !!}
                             {!! Form::text('medicalHistory',$patient->medicalHistory,['class'=>'form-control', 'required']) !!}
                         </div>
+
+
+
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
 
                         {!! Form::close() !!}
