@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Administrator;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdministratorController extends Controller
 {
@@ -33,7 +35,7 @@ class AdministratorController extends Controller
     public function create()
     {
         //
-        return view('administrator/create');
+        return view('administrators/create');
     }
 
     /**
@@ -48,10 +50,25 @@ class AdministratorController extends Controller
         $this->validate($request, [
 
         ]);
+
+        $user = new User($request->all());
+
+        //$user->name = Input::get('name');
+
+        $user->password=Hash::make($user['password']);
+        //$user->password = Hash::make(Input::get('password'));
+
+        $user->save();
+
+
+
         $administrator = new Administrator($request->all());
+        $administrator['user_id'] = $user->id;
         $administrator->save();
 
         // return redirect('especialidades');
+
+
 
         flash('Administrador creado correctamente');
 

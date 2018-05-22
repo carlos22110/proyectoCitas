@@ -17,24 +17,19 @@
                         <table class="table table-striped table-bordered">
                             <tr>
 
+                                <th>Nombre</th>
                                 <th>Nuhsa</th>
                                 <th>Historial Médico</th>
-                                <th>Síntoma</th>
-
 
                                 <th colspan="2">Acciones</th>
                             </tr>
 
                             @foreach ($patients as $patient)
 
-                                @foreach($symptoms as $symptom)
-
-
                                 <tr>
+                                    <td>{{ $patient->user->name }}</td>
                                     <td>{{ $patient->nuhsa }}</td>
                                     <td>{{ $patient->medicalHistory }}</td>
-                                    <td>{{ $patient['id']->$symptom->description }}</td>
-
                                     <td>
                                         {!! Form::open(['route' => ['patients.edit',$patient->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
@@ -47,7 +42,15 @@
 
                                     </td>
                                 </tr>
+
+                                @foreach($patient->symptom as $symptom)
+                                <tr>
+                                    <td> </td>
+                                    <td>Sintoma:</td>
+                                    <td colspan="3">{{$symptom->description }}</td>
+                                </tr>
                                 @endforeach
+
                             @endforeach
                         </table>
                     </div>

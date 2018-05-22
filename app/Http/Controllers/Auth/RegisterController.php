@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Patient;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -40,6 +41,8 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -55,6 +58,13 @@ class RegisterController extends Controller
             'NIF' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'nuhsa' => 'required|max:255',
+            'medicalHistory' => 'required|max:255',
+           // 'user_id' => 'required'
+
+
+
+
         ]);
     }
 
@@ -64,9 +74,12 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
+
+
     protected function create(array $data)
     {
-        return User::create([
+
+    /*    $user = User::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
             'birthdate' => $data['birthdate'],
@@ -74,5 +87,36 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        $user->save();
+*/
+
+        $user = new User();
+        $user-> name = $data['name'];
+        $user-> surname = $data['surname'];
+        $user-> birthdate = $data['birthdate'];
+        $user-> NIF = $data['NIF'];
+        $user-> email = $data['email'];
+        $user-> password = Hash::make($data['password']);
+
+        $user->save();
+
+     /*   return Patient::create([
+
+            'nuhsa' => $data['nuhsa'],
+            'medicalHistory' => $data['medicalHistory'],
+          //  'user_id' => $user['id'],
+            'user_id' => $user->id
+        ]);
+     */
+     $patient = new Patient($data);
+     $patient-> nuhsa = $data['nuhsa'];
+     $patient-> nuhsa = $data['nuhsa'];
+
+
+     $patient -> user()->associate($user);
+     $patient->save();
+
+     return $user;
+
     }
 }

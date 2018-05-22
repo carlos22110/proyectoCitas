@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use phpDocumentor\Reflection\Types\Boolean;
+
 
 class User extends Authenticatable
 {
@@ -39,4 +41,32 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Administrator');
     }
+
+
+    public function isDoctor()
+    {
+
+        $doctors = Doctor::all();
+        foreach ($doctors as $doctor) {
+            if ($this->id == $doctor->user_id) {
+                return true;
+            }
+        }
+          return false;
+    }
+
+    public function isPatient(){
+        $patients = Patient::all();
+        foreach ($patients as $patient)
+            if ($this->id==$patient->user_id) {
+                      return true;
+            }
+
+        return false;
+    }
+
+//    public function isAdministrator(){
+        //logica para comprobar si es admin
+ //       return true;
+ //   }
 }

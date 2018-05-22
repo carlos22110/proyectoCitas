@@ -68,6 +68,34 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="nuhsa" class="col-md-4 col-form-label text-md-right">NUHSA</label>
+
+                            <div class="col-md-6">
+                                <input id="nuhsa" type="text" class="form-control{{ $errors->has('nuhsa') ? ' is-invalid' : '' }}" name="nuhsa" value="{{ old('nuhsa') }}" required autofocus>
+
+                                @if ($errors->has('nuhsa'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('nuhsa') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="medicalHistory" class="col-md-4 col-form-label text-md-right">Historial Médico</label>
+
+                            <div class="col-md-6">
+                                <input id="medicalHistory" type="text" class="form-control{{ $errors->has('medicalHistory') ? ' is-invalid' : '' }}" name="medicalHistory" value="{{ old('medicalHistory') }}" required autofocus>
+
+                                @if ($errors->has('medicalHistory'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('medicalHistory') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail</label>
 
                             <div class="col-md-6">
@@ -106,7 +134,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Registro
+                                    Registrarse
                                 </button>
                             </div>
                         </div>

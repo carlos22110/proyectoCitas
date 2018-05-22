@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\UserController;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Patient;
+use App\Doctor;
 
 class LoginController extends Controller
 {
@@ -25,7 +30,40 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    //protected $redirectTo = '/home';
+
+
+    protected function redirectTo(){
+        $user = Auth::user();
+
+        $doctors = Doctor::all();
+        foreach ($doctors as $doctor) {
+            if ($user->id == $doctor->user_id) {
+                return '/doctors';
+            }
+        }
+        $patients = Patient::all();
+        foreach ($patients as $patient) {
+            if ($user->id == $patient->user_id) {
+                return '/patients';
+            }
+        }
+
+        return '/home';
+
+      /*  dd($user->NIF);
+        if($user->isDoctor()){
+            return '/doctors';
+            //ir a medico.index return '/medico';
+        }
+        else if ($user->isPatient()){
+            return '/patients';
+            //ir a paciente.index
+        }
+        else{ //si es administrador
+            return '/home';
+        }*/
+    }
 
     /**
      * Create a new controller instance.

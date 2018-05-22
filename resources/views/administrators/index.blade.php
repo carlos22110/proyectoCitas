@@ -17,6 +17,7 @@
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>ID</th>
+                                <th>Nombre</th>
 
                                 <th colspan="1">Acción</th>
                             </tr>
@@ -26,6 +27,7 @@
 
                                 <tr>
                                     <td>{{ $administrator->id }}</td>
+                                    <td>{{ $administrator->user->name }}</td>
 
                                     <td>
                                         {!! Form::open(['route' => ['administrators.destroy',$administrator->id], 'method' => 'delete']) !!}
