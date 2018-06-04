@@ -21,10 +21,6 @@
                             </div>--}}
 
 
-
-
-
-
                             {!! Form::label('patient_id', 'Nombre del paciente') !!}
 
 
@@ -34,7 +30,7 @@
                                             @foreach ($patients as $patient)
 
 
-                                        <option id="$patient->id" value="{{$patient->id}}">{{ $patient->user->name }}
+                                        <option id="$patient->id" value="{{$patient->id}}">{{ $patient->user->name }} {{$patient->user->surname }}
 
 
                                         </option >

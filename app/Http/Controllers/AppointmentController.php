@@ -26,8 +26,9 @@ class AppointmentController extends Controller
     {
         //
         $appointments = Appointment::all();
+        $sorted = $appointments->sortBy('date');
 
-        return view('appointments/index')->with('appointments', $appointments);
+        return view('appointments/index')->with('appointments', $sorted);
     }
 
     /**
@@ -100,7 +101,7 @@ class AppointmentController extends Controller
 
         flash('Cita creada correctamente');
 
-        return redirect()->route('appointments.index');
+        return redirect()->route('patients.appointments');
     }
 
     /**
@@ -124,9 +125,33 @@ class AppointmentController extends Controller
     public function edit($id)
     {
         //
+        $doctor_patients = Doctor_Patient::all();
+        $doctors= Doctor::all();
+
+        $user = Auth::user();
+
+
+        $patient = $user->patient;
+
+
+        foreach ($doctor_patients as $doctor_patient) {
+            if ($patient->id == $doctor_patient->patient_id) {
+                $doctors_id[] = $doctor_patient->doctor_id;
+                //   array_add($doctors_id,'doctor_id',$doctor_patient->doctor_id);
+            }
+        }
+
+        foreach ($doctors as $doctor ){
+            foreach ($doctors_id as $doctor_id){
+                if($doctor->id == $doctor_id) {
+                    $docs[] = $doctor;
+                }
+            }
+        }
+
         $appointment = Appointment::find($id);
 
-        return view('appointments/edit',['appointment'=> $appointment ]);
+        return view('appointments/edit',['appointment'=> $appointment ])->with('docs',$docs);
     }
 
     /**
@@ -152,7 +177,7 @@ class AppointmentController extends Controller
 
         flash('Cita modificada correctamente');
 
-        return redirect()->route('appointments.index');
+        return redirect()->route('patients.appointments');
     }
 
     /**
@@ -168,6 +193,6 @@ class AppointmentController extends Controller
         $appointment->delete();
         flash('Cita borrada correctamente');
 
-        return redirect()->route('appointments.index');
+        return redirect()->route('patients.appointments');
     }
 }

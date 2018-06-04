@@ -31,15 +31,8 @@
 
 
                                 <td>
-                        {!! Form::close() !!}
-                        {!! Form::open(['route' => 'patients.index', 'method' => 'get']) !!}
-                        {!!   Form::submit('Ir a pacientes', ['class'=> 'btn btn-secondary'])!!}
-                        {!! Form::close() !!}
-                                </td>
-
-                                <td>
-                        {!! Form::open(['route' => 'appointments.index', 'method' => 'get']) !!}
-                        {!!   Form::submit('Ir a citas', ['class'=> 'btn btn-primary'])!!}
+                        {!! Form::open(['route' => 'doctors.appointments', 'method' => 'get']) !!}
+                        {!!   Form::submit('Ver mis citas', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
                                 </td>
 
@@ -57,7 +50,7 @@
 
                                 <td>
                                     {!! Form::open(['route' => 'doctor_patient.index', 'method' => 'get']) !!}
-                                    {!!   Form::submit('Ir a Relaciones', ['class'=> 'btn btn-warning'])!!}
+                                    {!!   Form::submit('Ir a relaciones', ['class'=> 'btn btn-warning'])!!}
                                     {!! Form::close() !!}
                                 </td>
                         </tr>

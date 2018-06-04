@@ -39,13 +39,13 @@ class LoginController extends Controller
         $doctors = Doctor::all();
         foreach ($doctors as $doctor) {
             if ($user->id == $doctor->user_id) {
-                return '/doctors';
+                return '/home';
             }
         }
         $patients = Patient::all();
         foreach ($patients as $patient){
             if ($user->id == $patient->user_id) {
-                return '/appointments';
+                return '/appointments/create';
             }
         }
 

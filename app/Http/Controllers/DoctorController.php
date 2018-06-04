@@ -10,8 +10,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Appointment;
 use App\Patient;
 use App\Doctor_Patient;
+use Illuminate\Support\Collection as Collection;
 
 
 class DoctorController extends Controller
@@ -180,6 +182,48 @@ class DoctorController extends Controller
      * @param  \App\Doctor  $doctor
      * @return \Illuminate\Http\Response
      */
+
+    public function destroyRel($patient_id)
+    {
+        //
+        $user = Auth::user();
+        $doctor_id=$user->doctor->id;
+        $doctor_patients =Doctor_Patient::all();
+
+        foreach ($doctor_patients as $doctor_patient){
+
+            if($doctor_id==$doctor_patient->doctor_id && $patient_id==$doctor_patient->patient_id){
+                $docpat=$doctor_patient;
+            }
+        }
+
+        $docpat->delete();
+        flash('Paciente borrado correctamente');
+
+        return redirect()->route('doctors.patients');
+    }
+
+
+    public function appointments()
+    {
+
+        $appointments = Appointment::all();
+        $user = Auth::user();
+        $doctor=$user->doctor;
+
+        foreach ($appointments as $appointment) {
+            if ($doctor->id == $appointment->doctor_id) {
+                $appointmentss[] = $appointment;
+            }
+        }
+        $collection = Collection::make($appointmentss);
+        $sorted = $collection->sortBy('date');
+        return view('doctors/appointments')->with('appointments', $sorted);
+
+    }
+
+
+
     public function destroy($id)
     {
         //

@@ -19,7 +19,7 @@
                             <tr>
                                 <td>
                                     {!! Form::open(['route' => 'doctor_patient.create', 'method' => 'get']) !!}
-                                    {!!   Form::submit('Crear relación', ['class'=> 'btn btn-danger'])!!}
+                                    {!!   Form::submit('Añadir nuevo paciente', ['class'=> 'btn btn-danger'])!!}
                                 </td>
 
                                 <td>
@@ -65,9 +65,10 @@
                                 <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Nuhsa</th>
+                                <th>Fecha de nacimiento</th>
                                 <th>Historial Médico</th>
 
-                                <th colspan="2">Acciones</th>
+                                <th colspan="1">Borrar</th>
                             </tr>
 
                             @foreach ($patients as $patient)
@@ -76,14 +77,11 @@
                                     <td>{{ $patient->id }}</td>
                                     <td>{{ $patient->user -> name }}</td>
                                     <td>{{ $patient->nuhsa }}</td>
+                                    <td>{{ $patient->user -> birthdate }}</td>
                                     <td>{{ $patient->medicalHistory }}</td>
+
                                     <td>
-                                        {!! Form::open(['route' => ['patients.edit',$patient->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
-                                        {!! Form::close() !!}
-                                    </td>
-                                    <td>
-                                        {!! Form::open(['route' => ['patients.destroy',$patient->id], 'method' => 'delete']) !!}
+                                        {!! Form::open(['route' => ['doctors.destroyRel',$patient->id], 'method' => 'delete']) !!}
                                         {!!   Form::submit('Borrar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                         {!! Form::close() !!}
 
@@ -94,7 +92,7 @@
                                     <tr>
                                         <td> </td>
                                           <td> <b>Síntoma:</b></td>
-                                        <td colspan="3">{{$symptom->description }}</td>
+                                        <td colspan="6">{{$symptom->description }}</td>
                                     </tr>
                                 @endforeach
 

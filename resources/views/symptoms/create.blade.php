@@ -16,11 +16,30 @@
                             {!! Form::label('description', 'Descripción del síntoma') !!}
                             {!! Form::text('description',null,['class'=>'form-control', 'required']) !!}
                         </div>
-                        <div class="form-group">
+{{--                        <div class="form-group">
                         {!! Form::label('patient_id', 'ID del paciente al que pertenece') !!}
                         {!! Form::text('patient_id',null,['class'=>'form-control', 'required']) !!}
-                        </div>
+                        </div>--}}
+                        {!! Form::label('patient_id', 'Nombre del paciente') !!}
 
+
+
+                        <select name="patient_id">
+
+                            @foreach ($patients as $patient)
+
+
+                                <option id="$patient->id" value="{{$patient->id}}">{{ $patient->user->name }} {{$patient->user->surname }}
+
+
+                                </option >
+
+                            @endforeach
+
+                            {{ Form::select('patient_id') }}
+
+
+                        </select>
 
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Symptom;
 use Illuminate\Http\Request;
+use App\Patient;
 
 class SymptomController extends Controller
 {
@@ -29,7 +30,8 @@ class SymptomController extends Controller
     public function create()
     {
         //
-        return view('symptoms/create');
+        $patients = Patient::all();
+        return view('symptoms/create')->with('patients', $patients);
     }
 
     /**
@@ -78,8 +80,9 @@ class SymptomController extends Controller
     public function edit($id)
     {
         //
+        $patients = Patient::all();
         $symptom = Symptom::find($id);
-        return view('symptoms/edit',['symptom'=> $symptom ]);
+        return view('symptoms/edit',['symptom'=> $symptom ])->with('patients', $patients);
     }
 
     /**

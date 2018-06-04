@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Appointment;
+use App\Doctor;
 use App\Patient;
 use App\Symptom;
 use App\User;
+use App\Doctor_Patient;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Collection as Collection;
 
 class PatientController extends Controller
 {
@@ -100,8 +105,27 @@ class PatientController extends Controller
         $symptoms = Symptom::all()->pluck('description','id');
 
         return view('patients/edit',['patient'=> $patient, 'symptoms' =>$symptoms]);
+    }
+
+    public function appointments()
+    {
+
+        $appointments = Appointment::all();
+        $user = Auth::user();
+        $patient=$user->patient;
+      //  $appointmentss[]=[];
+
+        foreach ($appointments as $appointment) {
+            if ($patient->id == $appointment->patient_id) {
+                $appointmentss[] = $appointment;
+            }
+        }
+        $collection = Collection::make($appointmentss);
+        $sorted = $collection->sortBy('date');
+        return view('patients/appointments')->with('appointments', $sorted);
 
     }
+
 
     /**
      * Update the specified resource in storage.

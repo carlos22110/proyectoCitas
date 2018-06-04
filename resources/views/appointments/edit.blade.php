@@ -20,10 +20,26 @@
                             {!! Form::label('reason', 'Motivo de la cita') !!}
                             {!! Form::text('reason',$appointment->reason,['class'=>'form-control', 'required']) !!}
                         </div>
-                        <div class="form-group">
+{{--                        <div class="form-group">
                             {!! Form::label('doctor_id', 'ID del doctor') !!}
                             {!! Form::text('doctor_id',$appointment->doctor_id,['class'=>'form-control', 'required']) !!}
-                        </div>
+                        </div>--}}
+
+                        {!! Form::label('doctor_id', 'Especialidad del médico') !!}
+
+
+
+                        <select name="doctor_id">
+
+                            @foreach ($docs as $doctor)
+
+                                <option  value="{{$doctor->id}}" > {{ $doctor->speciality}}</option>
+
+                            @endforeach
+
+                            {{ Form::select('doctor_id') }}
+
+                        </select>
 
 
 

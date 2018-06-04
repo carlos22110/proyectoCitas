@@ -59,7 +59,7 @@
 
                             {!! Form::close() !!}
 
-                            {!! Form::open(['route' => 'appointments.index', 'method' => 'get']) !!}
+                            {!! Form::open(['route' => 'patients.appointments', 'method' => 'get']) !!}
                             {!!   Form::submit('Ver citas', ['class'=> 'btn btn-secondary'])!!}
                             {!! Form::close() !!}
 

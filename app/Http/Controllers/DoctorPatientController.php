@@ -43,6 +43,7 @@ class DoctorPatientController extends Controller
        // $pats = Patient::all();
         $doctor_patients = Doctor_Patient::all();
         $user = Auth::user();
+        $rest=[];
 
         foreach ($patients as $patient){
             $pats[]=$patient;

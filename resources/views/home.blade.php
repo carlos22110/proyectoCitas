@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    ¡Ha accedido correctamente!
+                    ¡Bienvenid@, {{$user->name}} {{$user->surname}}!
 
 
                         <table class="table table-striped table-bordered">

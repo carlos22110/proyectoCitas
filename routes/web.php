@@ -16,7 +16,10 @@ Route::get('/', function () {
 });
 
 Route::get('doctors/patients', 'DoctorController@patients')->name('doctors.patients');
-Route::delete('patients/destroyAll', 'PatientController@destroyAll')->name('patients.destroyAll');
+Route::get('patients/appointments', 'PatientController@appointments')->name('patients.appointments');
+Route::get('doctors/appointments', 'DoctorController@appointments')->name('doctors.appointments');
+Route::delete('doctors/destroyRel/{id}', 'DoctorController@destroyRel')->name('doctors.destroyRel');
+//Route::delete('patients/destroyAll', 'PatientController@destroyAll')->name('patients.destroyAll');
 
 Route::resource('users', 'UserController');
 Route::resource('administrators', 'AdministratorController');
