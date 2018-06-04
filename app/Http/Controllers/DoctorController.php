@@ -6,13 +6,27 @@ use App\Doctor;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Patient;
+use App\Doctor_Patient;
+
 
 class DoctorController extends Controller
 {
 
-   /* public function __construct()
+    public function __construct()
     {
-        $this->middleware('auth');
+/*        $user = Auth::user();
+        $doctors = Doctor::all();
+        foreach ($doctors as $doctor) {
+            if ($user->id == $doctor->user_id) {
+                $this->middleware('$user');
+            }
+        }*/
+       // $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -32,6 +46,34 @@ class DoctorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function patients()
+    {
+
+        $doctor_patients = Doctor_Patient::all();
+        $user = Auth::user();
+        $doctor=$user->doctor;
+        $patients=Patient::all();
+
+        foreach ($doctor_patients as $doctor_patient) {
+            if ($doctor->id == $doctor_patient->doctor_id) {
+                $patients_id[] = $doctor_patient->patient_id;
+            }
+        }
+        foreach ($patients as $patient ){
+            foreach ($patients_id as $patient_id){
+                if($patient->id == $patient_id) {
+                    $pats[] = $patient;
+                }
+            }
+        }
+
+        return view('doctors/patients')->with('patients', $pats);
+
+    }
+
+
+
     public function create()
     {
         //
@@ -106,6 +148,8 @@ class DoctorController extends Controller
 
     }
 
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -145,4 +189,8 @@ class DoctorController extends Controller
 
         return redirect()->route('doctors.index');
     }
+
+
+
+
 }

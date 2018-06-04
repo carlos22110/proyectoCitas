@@ -19,8 +19,9 @@
 
                                 <th>Fecha y Hora</th>
                                 <th>Motivo</th>
-                                <th>ID del médico</th>
-                                <th>ID del paciente</th>
+                                <th>Nombre del médico</th>
+                                <th>Especialidad del médico</th>
+                                <th>Nombre del paciente</th>
 
 
                                 <th colspan="2">Acciones</th>
@@ -33,8 +34,10 @@
                                 <tr>
                                     <td>{{ $appointment->date }}</td>
                                     <td>{{ $appointment->reason }}</td>
-                                    <td>{{ $appointment->doctor_id }}</td>
-                                    <td>{{ $appointment->patient_id }}</td>
+                                    <td>{{ $appointment->doctor->user->name }}</td>
+                                    <td>{{ $appointment->doctor->speciality }}</td>
+                                    <td>{{ $appointment->patient->user->name }}</td>
+
                                     <td>
                                         {!! Form::open(['route' => ['appointments.edit',$appointment->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
@@ -47,6 +50,8 @@
 
                                     </td>
                                 </tr>
+
+
                             @endforeach
                         </table>
                     </div>

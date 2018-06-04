@@ -43,9 +43,9 @@ class LoginController extends Controller
             }
         }
         $patients = Patient::all();
-        foreach ($patients as $patient) {
+        foreach ($patients as $patient){
             if ($user->id == $patient->user_id) {
-                return '/patients';
+                return '/appointments';
             }
         }
 

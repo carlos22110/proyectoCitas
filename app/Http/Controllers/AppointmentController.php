@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Appointment;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Patient;
+use App\Doctor;
+use App\Doctor_Patient;
 class AppointmentController extends Controller
 {
 
@@ -32,8 +37,33 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        //
-        return view('appointments/create');
+
+
+        $doctor_patients = Doctor_Patient::all();
+        $doctors= Doctor::all();
+
+        $user = Auth::user();
+
+
+       $patient = $user->patient;
+
+
+        foreach ($doctor_patients as $doctor_patient) {
+            if ($patient->id == $doctor_patient->patient_id) {
+                $doctors_id[] = $doctor_patient->doctor_id;
+             //   array_add($doctors_id,'doctor_id',$doctor_patient->doctor_id);
+            }
+        }
+
+        foreach ($doctors as $doctor ){
+            foreach ($doctors_id as $doctor_id){
+                if($doctor->id == $doctor_id) {
+                $docs[] = $doctor;
+             }
+            }
+        }
+
+        return view('appointments/create')->with('doctors_id',$doctors_id)->with('docs',$docs);
     }
 
     /**
@@ -48,14 +78,25 @@ class AppointmentController extends Controller
         $this->validate($request, [
             'date' => 'required|max:255',
             'reason' => 'required|max:255',
-            'doctor_id' => 'required|max:255',
-            'patient_id' => 'required|max:255'
+          //  'doctor_id' => 'required|max:255',
+           // 'patient_id' => 'required|max:255'
         ]);
 
+        $user = Auth::user();
+
+        $patients = Patient::all();
+        foreach ($patients as $patient) {
+            if ($user->id == $patient->user_id) {
+                $patients_id=$patient['id'];
+            }
+        }
+
         $appointment = new Appointment($request->all());
+        $appointment->patient_id = $patients_id;
+      //  $appointment['patient_id'] = $user->patient['id'];
         $appointment->save();
 
-        // return redirect('especialidades');
+
 
         flash('Cita creada correctamente');
 
@@ -101,7 +142,7 @@ class AppointmentController extends Controller
         $this->validate($request, [
             'date' => 'required|max:255',
             'reason' => 'required|max:255',
-            'doctor_id' => 'required|max:255'
+            //'doctor_id' => 'required|max:255'
         ]);
 
         $appointment = Appointment::find($id);

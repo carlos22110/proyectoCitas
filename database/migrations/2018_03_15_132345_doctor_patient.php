@@ -17,8 +17,8 @@ class DoctorPatient extends Migration
         Schema::create('doctor_patient', function (Blueprint $table) {
 
             $table->increments('id')->unique();
-            $table->unsignedInteger('patient_id')->unique();
-            $table->unsignedInteger('doctor_id')->unique();
+            $table->unsignedInteger('patient_id');
+            $table->unsignedInteger('doctor_id');
 
 
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade')->onUpdate('cascade');

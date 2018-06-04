@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::delete('doctors/destroyAll', 'DoctorController@destroyAll')->name('doctors.destroyAll');
+Route::get('doctors/patients', 'DoctorController@patients')->name('doctors.patients');
 Route::delete('patients/destroyAll', 'PatientController@destroyAll')->name('patients.destroyAll');
 
 Route::resource('users', 'UserController');
@@ -24,6 +24,7 @@ Route::resource('doctors', 'DoctorController');
 Route::resource('patients', 'PatientController');
 Route::resource('symptoms', 'SymptomController');
 Route::resource('appointments', 'AppointmentController');
+Route::resource('doctor_patient', 'DoctorPatientController');
 
 
 

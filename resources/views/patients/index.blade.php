@@ -8,15 +8,54 @@
                     <div class="panel-heading">Pacientes</div>
 
                     <div class="panel-body">
-                        @include('flash::message')
-                        {!! Form::open(['route' => 'patients.create', 'method' => 'get']) !!}
-                        {!!   Form::submit('Crear paciente', ['class'=> 'btn btn-primary'])!!}
-                        {!! Form::close() !!}
+                        <table class="table table-striped table-bordered">
+                            <tr>
+
+                                <th colspan="5">Ir a</th>
+                            </tr>
+
+                            <tr>
+
+                                <td>
+
+                                    {!! Form::open(['route' => 'patients.create', 'method' => 'get']) !!}
+                                    {!!   Form::submit('Crear paciente', ['class'=> 'btn btn-danger'])!!}
+                                    {!! Form::close() !!}
+                                </td>
+
+
+                                <td>
+                                    {!! Form::open(['route' => 'appointments.index', 'method' => 'get']) !!}
+                                    {!!   Form::submit('Ir a citas', ['class'=> 'btn btn-primary'])!!}
+                                    {!! Form::close() !!}
+                                </td>
+
+                                <td>
+                                    {!! Form::open(['route' => 'symptoms.index', 'method' => 'get']) !!}
+                                    {!!   Form::submit('Ir a síntomas', ['class'=> 'btn btn-success'])!!}
+                                    {!! Form::close() !!}
+                                </td>
+
+                                <td>
+                                    {!! Form::open(['route' => 'administrators.index', 'method' => 'get']) !!}
+                                    {!!   Form::submit('Ir a administradores', ['class'=> 'btn btn-info'])!!}
+                                    {!! Form::close() !!}
+                                </td>
+
+                                <td>
+                                    {!! Form::open(['route' => 'doctors.index', 'method' => 'get']) !!}
+                                    {!!   Form::submit('Ir a médicos', ['class'=> 'btn btn-warning'])!!}
+                                    {!! Form::close() !!}
+                                </td>
+                            </tr>
+
+                        </table>
 
                         <br><br>
                         <table class="table table-striped table-bordered">
                             <tr>
 
+                                <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Nuhsa</th>
                                 <th>Historial Médico</th>
@@ -27,7 +66,8 @@
                             @foreach ($patients as $patient)
 
                                 <tr>
-                                    <td>{{ $patient->user->name }}</td>
+                                    <td>{{ $patient->id }}</td>
+                                    <td>{{ $patient->user -> name }}</td>
                                     <td>{{ $patient->nuhsa }}</td>
                                     <td>{{ $patient->medicalHistory }}</td>
                                     <td>
@@ -46,8 +86,8 @@
                                 @foreach($patient->symptom as $symptom)
                                 <tr>
                                     <td> </td>
-                                    <td>Sintoma:</td>
-                                    <td colspan="3">{{$symptom->description }}</td>
+                                    <td><strong>Síntoma:</strong></td>
+                                    <td colspan="4">{{$symptom->description }}</td>
                                 </tr>
                                 @endforeach
 
